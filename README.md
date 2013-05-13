@@ -15,7 +15,7 @@ Version number SHALL be compatible with [Semantic Versioning](http://semver.org/
 ```scheme
 ;; Command MUST in one line
 ;; Nested parentheses SHALL NOT be used
-( command arg0 arg1 ... )
+(command arg0 arg1 ...)
 ```
 
 ### C APIs
@@ -25,6 +25,27 @@ All extern function or variable SHALL in the namespace 'lsr\_', 'Lsr\_' OR 'LSR\
 
 The C APIs SHALL NOT reentrant. Which means it is not thread-safe.
 
+#### Built-in command
+```scheme
+;; All built-in command SHALL return 0 if success or 1 if fail.
+;; Except ($?) will return the same value as the last command
+;; 
+;; Show last command return value
+($?)
+;; Show all commands and a brief introduction.
+(help)
+;; Show manual of a specific command.
+(man command)
+;; + - * /
+(+ num0 num1 ...)
+(- num0 num1 ...) ; num0 - num1 - num2 - ...
+(* num0 num1 ...)
+(/ num0 num1 ...) ; num0 / num1 / num2 / ...
+
+#### Initialize and add your own command
+You will get a example in [test/](https://github.com/jks-liu/lisp-style-repl/tree/master/test) directory.
+
+A command named "copyright" MUST be implemented.
 
 ## License 
 Copyright 2013 [jks Liu](http://jks-liu.github.io/). Some right reserved.
