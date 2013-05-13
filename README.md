@@ -36,16 +36,24 @@ The C APIs SHALL NOT reentrant. Which means it is not thread-safe.
 (help)
 ;; Show manual of a specific command.
 (man command)
-;; + - * /
+;; + - * / (TODO)
 (+ num0 num1 ...)
 (- num0 num1 ...) ; num0 - num1 - num2 - ...
 (* num0 num1 ...)
 (/ num0 num1 ...) ; num0 / num1 / num2 / ...
+```
 
 #### Initialize and add your own command
 You will get a example in [test/](https://github.com/jks-liu/lisp-style-repl/tree/master/test) directory.
 
 A command named "copyright" MUST be implemented.
+
+A command including built-in command which return non-zero SHALL be considered a error, So the ($?) will return a error even it executed successfully.
+
+Command return value MUST in range \[0, 256\), this range is [POSIX-compatible](http://en.wikipedia.org/wiki/Exit_status).
+
+### Authentication 
+TODO
 
 ## License 
 Copyright 2013 [jks Liu](http://jks-liu.github.io/). Some right reserved.

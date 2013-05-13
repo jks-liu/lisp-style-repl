@@ -12,6 +12,7 @@ begin:
 CFLAGS += -I..
 CFLAGS += -std=c99
 CFLAGS += -Wall -Wextra
+CFLAGS += -O2
 
 CSRCS = $(TARGET).c ../lisp-style-repl.c
 
