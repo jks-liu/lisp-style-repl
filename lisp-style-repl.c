@@ -19,17 +19,17 @@ static struct {
         {"$?",
          get_last_return_value,
          (const char *[]){
-                "Show last command return value",
+                "Last return value",
                 NULL}},
         {"help",
          help,
          (const char *[]){
-                "Show all commands and a briet introduction",
+                "Show commands",
                 NULL}},
         {"man",
          manual,
          (const char *[]){
-                "Show manual of a spcific command",
+                "Manual of a command",
                 NULL}},
         {NULL, NULL, NULL}
     }
@@ -64,7 +64,6 @@ static int get_last_return_value(int argc, char *argv[]) {
     (void)argv;
     char s[4];
     my_itostr(s, g_status.last_return_value);
-    (*g_status.setting_p->put_str)("Last command return value: ");
     (*g_status.setting_p->put_str)(s);
     (*g_status.setting_p->put_str)("\n");
     return g_status.last_return_value;
@@ -103,7 +102,7 @@ static int help(int argc, char *argv[]){
 static int manual(int argc, char *argv[]){
     int (*put_str)(const char *) = g_status.setting_p->put_str;
     if (argc != 2) {
-        put_str("Bad command options, type 'man man' for help\n");
+        put_str("Bad option\n");
         return LSR_ERR_COMMAND_ERR;
     }
 
@@ -140,7 +139,7 @@ static int manual(int argc, char *argv[]){
 
     if (return_status != 0) {
         put_str(argv[1]);
-        put_str(": No such command\n");
+        put_str(": No command\n");
     }
 
     return return_status;
@@ -213,9 +212,9 @@ int lsr_execute(char *restrict command) {
     }
     
     int (*put_str)(const char *) = g_status.setting_p->put_str;
-    put_str("Execute command: ");
+    put_str("Exe ");
     put_str(g_status.setting_p->argv[0]);
-    put_str(". ");
+    put_str(" ");
     if (g_status.setting_p->use_color) {
         if (return_status == 0) {
             put_str("\x1b[32;1m");
@@ -228,16 +227,14 @@ int lsr_execute(char *restrict command) {
         put_str("Success.\n");
         break;
     case LSR_ERR_NO_COMMAND:
-        put_str("Fail: command not found.\n"
-                "Type 'help' to show all commands\n");
+        put_str("Fail: no command.\n");
         break;
     case LSR_ERR_COMMAND_ERR:
-        put_str("Fail: command execute with a error.\n"
-            "Type 'man <command>' to show the help of the command.\n");
+        put_str("Fail: err.\n");
         break;
     default:
         return_status = LSR_ERR_OTHER;
-        put_str("Fail: sorry, can not find the reason.\n");
+        put_str("Fail\n");
         break;
     }
     put_str("\x1b[0m");
