@@ -52,6 +52,13 @@ A command including built-in command which return non-zero SHALL be considered a
 
 Command return value MUST in range \[0, 256\), this range is [POSIX-compatible](http://en.wikipedia.org/wiki/Exit_status).
 
+#### Use C++ ?
+There are something wrong c++
+ - C++ did not define `restrict' 
+ - C++ had [different semantics with compound literals](http://gcc.gnu.org/onlinedocs/gcc/Compound-Literals.html)
+
+ Please refer [test-cpp/](https://github.com/jks-liu/lisp-style-repl/tree/master/test-cpp) for details to fix errors. 
+
 ### Authentication 
 TODO
 
