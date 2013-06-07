@@ -1,4 +1,11 @@
+*.o
+
 test/*
 
 !test/Makefile
 !test/*.c
+
+test-cpp/*
+
+!test-cpp/*.cpp
+!test-cpp/Makefile
