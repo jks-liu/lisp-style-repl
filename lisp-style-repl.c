@@ -35,10 +35,10 @@ static struct {
     }
 };
 
-static void itostr_iterate(char *restrict str, int i) {
+static unsigned char itostr_iterate(char *restrict str, int i) {
     *str = '0' + (i % 10);
     if (i / 10 == 0){
-        return;
+        return 0;
     } else {
         return itostr_iterate(str + 1, i / 10);
     }
